@@ -1,7 +1,6 @@
 pipeline {
-	agent none
+	agent any
 	stages {
-		agent { label 'node3' }
 		stage ('STAGE 1') {
 			steps {
 				echo 'This is node3 node with STAGE 1'
