@@ -1,17 +1,20 @@
 pipeline {
-	agent any
-	stages {
-		stage ('STAGE 1') {
-			steps {
-				echo 'This is node3 node with STAGE 1'
-				sh 'sleep 10'
-			}	
-		}
-		stage ('STAGE 2') {
-			steps {
-				echo 'This is slaveforjava with STAGE 2'
-				sh 'sleep 10'
-			}	
-		}
-	}
+    agent none
+    stages {
+         stage ('Stage1') {
+            agent {label 'master'}
+            steps {
+                git 'https://github.com/Rohan-designer/Test-1.git'
+                sh 'mvn clean install'
+            }
+       }
+      stage ('Stage2') {
+          agent {label'Slave089'}
+                steps {
+                    git 'https://github.com/Rohan-designer/Jenkinsproject2.git'
+                    sh 'make'
+                }
+            }
+    }
+    
 }
